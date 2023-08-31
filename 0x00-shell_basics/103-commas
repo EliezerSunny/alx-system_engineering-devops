@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -Ap1 --group-directories-first | LC_COLLATE=C sort -d -k1.1n -k1.2,1.2 -k1.3
+ls -xamp 
