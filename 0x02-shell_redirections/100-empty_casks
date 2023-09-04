@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -type f -empty -printf "%f\n" && find . -type d -empty -printf "%f\n"
+find . -name '.*' -o -type d -exec printf "%s\n" {}/* {} \; 2>/dev/null | sed -e 's/.*\///' | sed -e '/^\s*$/d'
