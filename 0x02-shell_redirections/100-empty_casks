@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -name '.*' -o -type d -exec printf "%s\n" {}/* {} \; 2>/dev/null | sed -e 's/.*\///' | sed -e '/^\s*$/d'
+find . -empty | rev | cut -d '/' -f 1 | rev
