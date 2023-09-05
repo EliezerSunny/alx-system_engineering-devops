@@ -1,2 +1,3 @@
 #!/bin/bash
+USER = 'Eliazer'
 echo = hello $USER 
