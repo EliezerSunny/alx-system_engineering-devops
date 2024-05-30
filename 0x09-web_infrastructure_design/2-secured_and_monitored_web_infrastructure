@@ -1,0 +1,80 @@
+### Secured and Monitored Web Infrastructure Design
+
+#### Overview
+
+This design outlines a secured and monitored web infrastructure using three servers to host a website accessible via www.foobar.com. The setup includes an Nginx web server, an application server, a MySQL database, an HAProxy load balancer, firewalls, SSL for HTTPS, and monitoring clients.
+
+#### Infrastructure Components
+
+1. **Load Balancer (HAProxy)**
+   - **Role:** Distributes incoming traffic across multiple servers.
+   - **Distribution Algorithm:** Round Robin
+     - **How it Works:** Sequentially distributes incoming requests to each server.
+   - **SSL Termination:** Secures traffic by handling HTTPS connections.
+   - **Firewall:** Protects against unauthorized access and threats.
+
+2. **Web Server (Nginx)**
+   - **Role:** Handles HTTP/HTTPS requests, serves static content, forwards dynamic requests.
+   - **Firewall:** Secures the server from external threats.
+
+3. **Application Server**
+   - **Role:** Processes business logic and dynamic requests.
+   - **Firewall:** Adds an additional layer of security.
+   - **Monitoring Client:** Collects performance and operational data.
+
+4. **Database (MySQL)**
+   - **Role:** Stores and manages application data.
+   - **Setup:** Primary-Replica (Master-Slave) cluster.
+   - **Monitoring Client:** Tracks database performance and health.
+
+5. **SSL Certificate**
+   - **Role:** Encrypts traffic to ensure secure communication.
+   - **Why HTTPS:** Protects data integrity and confidentiality between the user's browser and the web server.
+
+6. **Monitoring Clients**
+   - **Role:** Collects data for monitoring tools like Sumologic.
+   - **How it Works:** Monitors server metrics, logs, and performance data.
+   - **Purpose:** Helps in identifying and resolving issues, ensuring optimal performance.
+
+7. **Additional Servers**
+   - **Server 1:** Hosts Nginx and the application server.
+   - **Server 2:** Hosts a replica of the application server for load balancing.
+   - **Server 3:** Hosts the MySQL database (Primary and Replica setup).
+
+#### Infrastructure Workflow
+
+1. **User Access:** User enters `www.foobar.com`.
+2. **DNS Lookup:** Resolves `www.foobar.com` to the load balancer's IP address.
+3. **Load Balancer:** HAProxy receives the request, handles SSL termination, and distributes it using Round Robin.
+4. **Web Server Handling:**
+   - Serves static content directly.
+   - Forwards dynamic requests to the application server.
+5. **Application Server:** Processes requests, potentially querying the MySQL database.
+6. **Database Interaction:** 
+   - **Primary Node:** Handles write operations and reads.
+   - **Replica Node:** Handles additional read operations and replicates data.
+7. **Monitoring:** Clients on each server collect and send data to the monitoring service.
+8. **Final Response:** Web server sends the response back to the load balancer, which forwards it to the user’s browser.
+
+#### Detailed Roles
+
+- **Firewalls:** 
+  - Protect each server from unauthorized access and threats.
+  - Filter traffic based on predefined security rules.
+- **HTTPS:**
+  - Encrypts traffic to ensure secure communication.
+  - Prevents data interception and tampering.
+- **Monitoring:**
+  - Tracks server performance and health.
+  - Collects data such as QPS (Queries Per Second) to monitor web server load.
+
+#### Issues with the Infrastructure
+
+- **SSL Termination at Load Balancer:**
+  - If the load balancer is compromised, all traffic can be intercepted.
+- **Single MySQL Write Server:**
+  - Creates a single point of failure for write operations.
+  - Limits scalability and performance.
+- **Servers with All Components:**
+  - Increases complexity and potential points of failure.
+  - Makes scaling individual components more difficult.

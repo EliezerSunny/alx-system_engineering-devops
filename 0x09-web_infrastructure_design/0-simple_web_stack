@@ -1,0 +1,55 @@
+### Simple Web Infrastructure Design
+
+#### Overview
+
+This design describes a basic web infrastructure using one server with Nginx, an application server, and MySQL, accessible via www.foobar.com.
+
+#### Infrastructure Components
+
+1. **User Request**
+   - **User:** Accesses `www.foobar.com`.
+
+2. **DNS Resolution**
+   - **Domain Name:** `foobar.com`
+   - **DNS Record:** `www` record points to IP `8.8.8.8`.
+     - **Role of Domain Name:** Translates the domain into an IP address.
+
+3. **Server**
+   - **IP Address:** `8.8.8.8`
+   - **Components:**
+     - **Web Server (Nginx):** Handles HTTP/HTTPS requests, serves static content, forwards dynamic requests.
+     - **Application Server:** Runs the application logic.
+     - **Application Files:** Codebase of the web application.
+     - **Database (MySQL):** Manages application data.
+
+4. **Network Communication**
+   - **Protocol:** HTTP/HTTPS
+     - **Role:** Facilitates data transfer between user and server.
+
+#### Workflow
+
+1. **User Access:** User enters `www.foobar.com`.
+2. **DNS Lookup:** Resolves `www.foobar.com` to `8.8.8.8`.
+3. **Request to Server:** Browser sends HTTP/HTTPS request to `8.8.8.8`.
+4. **Nginx Handling:** 
+   - Serves static content directly.
+   - Forwards dynamic requests to the application server.
+5. **Application Server:** Processes requests, queries MySQL if needed.
+6. **Database Interaction:** MySQL returns data to the application server.
+7. **Response Assembly:** Application server sends response to Nginx.
+8. **Final Response:** Nginx sends response back to the browser.
+
+#### Roles
+
+- **Server:** Hosts all components and handles requests.
+- **Domain Name:** Provides a human-readable address.
+- **DNS Record:** Translates domain names to IP addresses.
+- **Web Server (Nginx):** Manages requests and serves content.
+- **Application Server:** Runs the application code.
+- **Database (MySQL):** Stores and retrieves data.
+
+#### Issues
+
+- **Single Point of Failure (SPOF):** Server failure makes the website inaccessible.
+- **Downtime for Maintenance:** Restarting the server for updates causes downtime.
+- **Scalability Limitations:** One server cannot handle high traffic.
