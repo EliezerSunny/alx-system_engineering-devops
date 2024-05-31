@@ -1,0 +1,18 @@
+### Web Infrastructure Design: Scaling Up
+
+#### Components Added and Reasons
+
+1. **Web Server**
+   - **Why Added**: Handles static content, offloads dynamic requests to the application server, improving performance and security.
+
+2. **Application Server**
+   - **Why Added**: Processes dynamic requests and business logic, isolating these functions from the web server to enhance efficiency and security.
+
+3. **Database Server**
+   - **Why Added**: Manages data storage and retrieval, providing centralized and optimized data management.
+
+4. **Load Balancer (HAproxy)**
+   - **Why Added**: Distributes incoming traffic across multiple servers, preventing any single server from being overwhelmed and ensuring high availability.
+
+5. **HAproxy Cluster**
+   - **Why Added**: Ensures high availability of the load balancer, preventing a single point of failure in the load balancing layer.
