@@ -41,7 +41,7 @@ frontend eliezersunny-frontend
         default_backend eliezersunny-backend
 
 frontend eliezersunny-frontend-https
-        bind *:443 ssl crt /etc/haproxy/certs/clickviral.tech.pem
+        bind *:443 ssl crt /etc/haproxy/certs/eliezersunny.tech.pem
         http-request set-header X-Forwarded-Proto https
          eliezersunny-backend
 

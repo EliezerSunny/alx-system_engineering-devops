@@ -7,4 +7,4 @@ sudo ls /etc/letsencrypt/live/www.eliezersunny.tech
 sudo mkdir -p /etc/haproxy/certs
 DOMAIN='www.eliezersunny.tech' sudo -E bash -c 'cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/letsencrypt/live/$DOMAIN/privkey.pem > /etc/haproxy/certs/$DOMAIN.pem'
 sudo chmod -R go-rwx /etc/haproxy/certs
-sudo nano /etc/haproxy/haproxy.cfg
+sudo vi /etc/haproxy/haproxy.cfg
