@@ -47,6 +47,6 @@ frontend eliezersunny-frontend-https
 
 backend eliezersunny-backend
         balance roundrobin
-        server 518138-web-01 100.25.24.103:80 check
+        server 518138-web-01 34.229.72.229:80 check
         server 518138-web-02 54.165.70.157:80 check
 
